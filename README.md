@@ -234,16 +234,16 @@ Open Score   = (1 - density_norm) × (1 - height_norm)
 
 # Optimization Strategy
 
-### ✔ OSMnx Caching Enabled  
+### OSMnx Caching Enabled  
 Reduces redundant API calls.
 
-### ✔ Vectorized GeoPandas Operations  
+### Vectorized GeoPandas Operations  
 Avoids nested loops for performance.
 
-### ✔ Sector Merging Algorithm  
+### Sector Merging Algorithm  
 Reduces rendering overhead.
 
-### ✔ Spatial Radius Clipping  
+### Spatial Radius Clipping  
 Pre-filter geometry before intersection.
 
 ---
@@ -270,7 +270,7 @@ pip install geopandas osmnx shapely pyproj requests networkx matplotlib pandas s
 
 ---
 
-# ▶ How To Run
+# How To Run
 
 ```bash
 git clone https://github.com/your-username/site-analysis-ALKF.git
