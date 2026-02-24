@@ -1,4 +1,4 @@
-# Site Analysis – ALKF
+# Computational Geospatial Intelligence Framework
 
 > Automated Geospatial Intelligence System for Urban Site Feasibility, Accessibility, Environmental Impact & 360° View Analysis
 
