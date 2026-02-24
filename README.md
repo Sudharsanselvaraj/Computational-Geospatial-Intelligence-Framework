@@ -90,7 +90,7 @@ site-analysis-ALKF/
 
 ---
 
-# 🔍 Module Breakdown
+# Module Breakdown
 
 ---
 
