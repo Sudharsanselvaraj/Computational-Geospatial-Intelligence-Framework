@@ -1,212 +1,176 @@
-# Site Analysis – ALKF
+<p>
+  <img src="public/logo.png" width="140" align="left">
+</p>
 
-> Automated Geospatial Intelligence System for Urban Site Feasibility, Accessibility, Environmental Impact & 360° View Analysis
+<h1 style="margin-top:0;">
+Computational Geospatial Intelligence Framework
+</h1>
 
----
+<hr>
 
-## Overview
+# Executive Summary
 
-**Site Analysis – ALKF** is a fully automated geospatial analysis toolkit designed for professional urban feasibility assessment.
+The **Computational Geospatial Intelligence Framework (CGIF)** is a modular Python-based spatial analysis system designed for automated urban feasibility assessment, spatial network modelling, environmental simulation, and multi-layer geospatial intelligence computation.
 
-It integrates:
+This framework integrates:
 
-- OpenStreetMap (OSM)
-- Government Building Height Data
-- Transportation Networks
-- Land Use & Amenity Layers
-- Spatial Scoring Algorithms
-- Traffic Noise Modelling
-- Multi-Type Input Resolver (LOT / PRN / STT)
+- Network-based accessibility modelling
+- Multi-scale spatial analytics
+- Environmental noise propagation modelling
+- 360° view sector classification
+- Zoning and density intelligence
+- Automated geospatial visualization pipelines
 
-The system produces high-quality professional maps for urban planning and development analysis.
+The system is structured as a computational GIS engine rather than a web application, enabling reproducible, high-performance spatial analysis workflows.
 
 ---
 
 # System Architecture
 
-## High-Level Workflow
+## Computational Pipeline
 
-```
-User Input (LOT / PRN / STT)
-            │
-            ▼
-Government GIS Resolver API
-            │
-            ▼
-Coordinate Transformation
-(EPSG:2326 → 4326 → 3857)
-            │
-            ▼
-Context Data Extraction
-(OSM + Static GIS)
-            │
-            ├── Land Use
-            ├── Amenities
-            ├── Transportation Network
-            ├── Building Heights
-            ├── Noise Sources
-            │
-            ▼
-Spatial Analysis Engine
-            │
-            ├── Distance Calculations
-            ├── Sector-Based View Scoring
-            ├── Traffic Noise Modeling
-            ├── Accessibility Buffers
-            ├── Density Metrics
-            │
-            ▼
-Visualization Engine
-(Matplotlib + GeoPandas)
-            │
-            ▼
-Professional Map Output
+```mermaid
+flowchart TD
+
+A[Lot Identifier / Coordinate Input]
+--> B[Coordinate Resolution & CRS Transformation]
+
+B --> C[Static Dataset Loader]
+C --> C1[Buildings Dataset]
+C --> C2[Zoning Dataset]
+C --> C3[OSM Network Extraction]
+
+C --> D[Spatial Analysis Engine]
+
+D --> D1[Walking Network Analysis]
+D --> D2[Driving Distance Analysis]
+D --> D3[Transport Network Mapping]
+D --> D4[Context & Zoning Overlay]
+D --> D5[360° View Sector Classification]
+D --> D6[Traffic Noise Propagation Model]
+
+D --> E[Visualization Engine]
+E --> F[PNG Outputs]
+E --> G[Report Generation]
 ```
 
 ---
 
-#  Repository Structure
+# Repository Structure
 
 ```
-site-analysis-ALKF/
+Computational-Geospatial-Intelligence-Framework/
 │
-├── Competing Developments Analysis.py
-├── Driving Distance Analysis.py
-├── Road Traffic Noise Impact.py
-├── Surrounding Amenities & Land Use Context.py
-├── Transportation Network Analysis.py
-├── Walking Distance.py
+├── MULTIPLE INPUT/
+│   ├── automated_site_analysis.py
+│   ├── Competing Developments Analysis.py
+│   ├── Driving Distance Analysis.py
+│   ├── Road Traffic Noise Impact.py
+│   ├── Surrounding Amenities & Land Use Context.py
+│   ├── Transportation Network Analysis.py
+│   ├── Walking Distance.py
+│   │
+│   └── outputs/
+│       ├── *.png (Generated analytical maps)
 │
-├── building_data/
-│   └── Building_Outline_Public.geojson
-│
-├── outputs/
-│   ├── maps/
-│   ├── reports/
-│   └── charts/
-│
-└── README.md
+├── README.md
+```
+
+The framework operates as a modular spatial analysis engine where each script represents an independent computational component.
+
+---
+
+# Core Analytical Modules
+
+---
+
+## 1. Walking Accessibility Analysis
+
+### Objective
+Evaluate pedestrian connectivity to nearby amenities using graph-based routing.
+
+### Computational Methods
+
+- OSMnx walk graph extraction
+- NetworkX shortest path computation
+- Service area buffer generation
+- Amenity density clustering
+
+### Core Algorithm
+
+```
+ShortestPath(G, source, target)
+ServiceArea = Nodes within threshold distance
 ```
 
 ---
 
-# 🔍 Module Breakdown
+## 2. Driving Distance Analysis
+
+### Objective
+Assess vehicular accessibility and travel-time reach.
+
+### Methods
+
+- Drive network graph extraction
+- Edge weighting by travel time
+- Isochrone polygon generation
+- Centrality scoring
 
 ---
 
-## Surrounding Amenities & Land Use Context
+## 3. Transportation Network Analysis
 
-**Purpose:**  
-Evaluate zoning environment and surrounding context.
+### Objective
+Quantify public transit accessibility.
 
-**Features:**
-- Residential / Commercial classification
-- Park & green space mapping
-- School & institution proximity
-- MTR routing
-- Bus stop clustering
-- Pedestrian path mapping
+### Includes
 
-**Core Engine:**
-- OSM spatial filtering
-- GeoDataFrame intersections
-- NetworkX shortest path routing
+- Bus stop spatial indexing
+- Node density scoring
+- Route proximity modelling
+- Transit coverage visualization
 
 ---
 
-## Transportation Network Analysis
+## 4. Context & Land Use Intelligence
 
-**Purpose:**  
-Assess mobility and connectivity efficiency.
+### Objective
+Analyze surrounding zoning and land-use structure.
 
-**Features:**
-- Drive-time buffers
-- Walk-time buffers
-- Isochrone generation
-- Network graph centrality
+### Methods
 
-**Technology:**
-- OSMnx Graph Extraction
-- Weighted Edge Routing
+- Polygon intersection via GeoPandas
+- Amenity spatial distribution
+- Green space ratio computation
+- Density estimation
 
 ---
 
-## Walking Distance Analysis
-
-**Purpose:**  
-Measure pedestrian accessibility to amenities.
-
-**Methodology:**
-- Extract walkable graph
-- Compute nearest node routing
-- Generate service buffers
-- Amenity density overlay
-
----
-
-## Driving Distance Analysis
-
-**Purpose:**  
-Evaluate vehicular accessibility.
-
-**Methodology:**
-- Drive network extraction
-- Travel-time weighted routing
-- Isochrone visualization
-- Major node proximity scoring
-
----
-
-## Road Traffic Noise Impact
-
-**Purpose:**  
-Estimate environmental noise exposure.
-
-**Model Basis:**
-
-```
-L = L₀ − 20 log₁₀(r)
-```
-
-Where:
-
-- `L₀` = Base traffic noise level  
-- `r` = Distance from road source  
-
-**Includes:**
-- Road hierarchy weighting
-- Distance attenuation modelling
-- Exposure zone classification
-
----
-
-## 360° View Analysis Engine
-
-**Purpose:**  
-Classify directional view quality around site.
+## 5. 360° View Sector Classification Engine
 
 ### Methodology
 
-1. Divide 360° into equal sectors  
-2. Compute:
-   - Green ratio
-   - Water ratio
-   - Building density
+1. Divide 360° into equal angular sectors  
+2. For each sector compute:
+   - Green coverage ratio
+   - Water coverage ratio
+   - Built-up density
    - Average building height  
-3. Normalize features  
-4. Apply weighted scoring  
-5. Assign dominant view type  
+3. Normalize feature values  
+4. Apply weighted scoring model  
+5. Merge adjacent sectors with identical classification  
 
 ### Scoring Model
 
 ```
-Green Score  = green_ratio
-Water Score  = water_ratio
-City Score   = height_norm × density_norm
-Open Score   = (1 - density_norm) × (1 - height_norm)
+Green  = green_ratio
+Water  = water_ratio
+City   = height_norm × density_norm
+Open   = (1 - height_norm) × (1 - density_norm)
 ```
 
-### Output Classes
+### Output Categories
 
 - GREEN VIEW
 - WATER VIEW
@@ -215,93 +179,139 @@ Open Score   = (1 - density_norm) × (1 - height_norm)
 
 ---
 
-# Implementation Status
+## 6. Road Traffic Noise Propagation Model
 
-| Module | Status |
-|--------|--------|
-| Multi-Type Input Resolver | ✅ Completed |
-| Context Mapping | ✅ Completed |
-| Walking Network Analysis | ✅ Completed |
-| Driving Network Analysis | ✅ Completed |
-| Noise Impact Modeling | ✅ Completed |
-| 360° View Analysis | ✅ Completed |
-| Visualization Engine | ✅ Completed |
-| Optimization Layer | ⚙️ Ongoing |
-| Report Automation | 🔄 Planned |
-| Web Deployment | 🔄 Planned |
-
----
-
-# Optimization Strategy
-
-### OSMnx Caching Enabled  
-Reduces redundant API calls.
-
-### Vectorized GeoPandas Operations  
-Avoids nested loops for performance.
-
-### Sector Merging Algorithm  
-Reduces rendering overhead.
-
-### Spatial Radius Clipping  
-Pre-filter geometry before intersection.
-
----
-
-# Requirements
+### Base Acoustic Model
 
 ```
-geopandas
-osmnx
-shapely
-pyproj
-requests
-networkx
-matplotlib
-pandas
-scikit-learn
+L = L₀ − 20 log₁₀(r)
 ```
 
-Install:
+Where:
 
-```bash
-pip install geopandas osmnx shapely pyproj requests networkx matplotlib pandas scikit-learn
+- L₀ = Source emission level  
+- r  = Distance from source  
+
+### Extended Adjustments
+
+```
+L_total =
+    L
+  + HeavyVehicleFactor
+  - BarrierAttenuation
+  - GroundAbsorption
+  + ReflectionCorrection
+```
+
+### Simulation Design
+
+- Grid-based propagation (10m resolution)
+- Road emission weighting
+- Spatial decay modelling
+- Heatmap visualization
+
+---
+
+# Data & CRS Strategy
+
+### Coordinate System Workflow
+
+- Input CRS: EPSG:2326
+- Geographic: EPSG:4326
+- Analysis CRS: EPSG:3857
+
+All spatial datasets standardized to EPSG:3857 for computational consistency.
+
+---
+
+# Performance Optimization Strategy
+
+- Dataset reduction & attribute pruning
+- Precomputed building height columns
+- Vectorized GeoPandas operations
+- Controlled DPI rendering (200)
+- Modular execution isolation
+- Reduced redundant geometry transformations
+
+---
+
+# Execution Instructions
+
+## Install Dependencies
+
+```
+pip install geopandas osmnx networkx shapely pyproj matplotlib numpy pandas contextily scikit-learn reportlab
+```
+
+## Run Individual Modules
+
+Example:
+
+```
+python "MULTIPLE INPUT/Walking Distance.py"
+```
+
+Each module generates PNG outputs in:
+
+```
+MULTIPLE INPUT/outputs/
 ```
 
 ---
 
-# How To Run
+# Output Artifacts
 
-```bash
-git clone https://github.com/your-username/site-analysis-ALKF.git
-cd site-analysis-ALKF
-python "Surrounding Amenities & Land Use Context.py"
-```
-
----
-
-# Outputs
-
-The system generates:
-
-- High-resolution urban context maps
-- View quality radial diagrams
-- Noise exposure overlays
-- Accessibility buffers
-- Competitive density maps
+| Module | Output Type |
+|--------|------------|
+| Walking | Accessibility Map (PNG) |
+| Driving | Isochrone Map (PNG) |
+| Transport | Transit Coverage Map (PNG) |
+| Context | Zoning & Land Use Map (PNG) |
+| View | Sector Classification Map (PNG) |
+| Noise | Propagation Heatmap (PNG) |
 
 ---
 
-# Engineering Value
+# Computational Characteristics
 
-This repository demonstrates:
+| Scenario | Execution Time |
+|----------|---------------|
+| Single Module Run | 5–15 sec |
+| Full Multi-Module Execution | 30–60 sec |
 
-- Advanced geospatial automation
-- Urban spatial intelligence modelling
-- Graph-based network analytics
-- Environmental impact modelling
-- Planning decision-support systems
+Performance depends on OSM extraction size and dataset resolution.
 
 ---
 
+# Engineering Significance
 
+This framework demonstrates:
+
+- Advanced computational GIS modelling
+- Multi-layer geospatial intelligence integration
+- Network-based routing systems
+- Environmental impact simulation
+- Sector-based visual intelligence classification
+- Modular geospatial architecture design
+- Reproducible spatial analytics workflow
+
+---
+
+# Future Expansion Roadmap
+
+- Batch multi-lot processing
+- Async processing pipeline
+- Parallelized spatial computations
+- Cloud-native deployment layer
+- REST API wrapper (separate repo)
+- Interactive dashboard integration
+
+---
+
+# License
+
+Specify license in LICENSE file.
+
+---
+
+© Computational Geospatial Intelligence Framework
